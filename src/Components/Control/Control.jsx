@@ -12,7 +12,7 @@ export function Control(){
   const handleSubmit = (e) => {
     const trimmedValue = value.trim()
     if (e.code === 'Enter' && trimmedValue) {
-      dispatch({ type: 'todos/TodoAdded', payload: trimmedValue });
+      dispatch({ type: 'todos/todoAdded', payload: trimmedValue });
       setValue('');
     }
   }

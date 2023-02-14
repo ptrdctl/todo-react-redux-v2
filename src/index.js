@@ -6,15 +6,6 @@ import App from './App';
 import {store} from "./store";
 import {Provider} from "react-redux";
 
-// console.log('Initial state: ', store.getState());
-//
-// store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about actions' });
-// console.log('Initial state: ', store.getState());
-// store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about reducers' });
-// console.log('Initial state: ', store.getState());
-// store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about stores' });
-// console.log('Initial state: ', store.getState());
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
