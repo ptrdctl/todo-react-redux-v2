@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Input } from "../Input/Input";
 import { Button } from "../Button/Button";
+import { addTodo } from '../../store'
 
 export function Control(){
 
@@ -12,7 +13,7 @@ export function Control(){
   const handleSubmit = (e) => {
     const trimmedValue = value.trim()
     if (e.code === 'Enter' && trimmedValue) {
-      dispatch({ type: 'todos/todoAdded', payload: trimmedValue });
+      dispatch(addTodo(trimmedValue));
       setValue('');
     }
   }

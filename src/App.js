@@ -1,6 +1,6 @@
 import './App.css';
-import { Control } from "./Components/Control/Control";
-import { List } from "./Components/List/List";
+import { Control } from "./сomponents/Control/Control";
+import { List } from "./сomponents/List/List";
 
 function App() {
   return (
