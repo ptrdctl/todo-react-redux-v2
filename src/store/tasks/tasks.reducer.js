@@ -5,16 +5,16 @@ const initialState = [];
 
 export function tasksReducer(state = initialState, action){
   switch(action.type){
-    case ADD_TODO: {
+    case ADD_TODO:
       return [
           ...state,
           {
             id: nanoid(),
             text: action.text,
-            completed: false
+            completed: false,
+            date: new Date()
           }
       ]
-    }
     default:
       return state;
   }

@@ -1,0 +1,1 @@
+export const getSorts = state => state.sorts

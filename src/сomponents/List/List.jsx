@@ -1,12 +1,42 @@
 import { useSelector } from "react-redux";
+import { getTasks } from "../../store";
+import { getSorts} from "../../store";
 
 export function List(){
 
-  const tasks = useSelector(state => state.tasks);
+  const tasks = useSelector(getTasks);
+  const sorts = useSelector(getSorts);
 
   return(
-    <ul>{tasks.map(todo => {
-      return <li key={todo.id}>{todo.text}</li>
-    })}</ul>
-  );
+      <div>
+      { (sorts.recentFirst) ? (
+        [...tasks].sort((a, b) => +b.date - +a.date).map(task => {
+          return(
+            <div key={task.id}>
+              <span>{task.date.toLocaleString()}</span>
+              <span>{task.text}</span>
+              <input type="checkbox"/>
+            </div>
+          )})
+        ) : (
+        tasks.map(task => {
+          return(
+            <div key={task.id}>
+              <span>{task.date.toLocaleString()}</span>
+              <span>{task.text}</span>
+              <input type="checkbox"/>
+            </div>
+          )
+        })
+        )}
+      </div>
+
+  )
+
+
+
+
+
+
+
 }

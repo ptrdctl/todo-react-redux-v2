@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Input } from "../Input/Input";
 import { Button } from "../Button/Button";
-import { addTodo } from '../../store'
+import { addTodo, sortTasksRecentFirst } from '../../store';
 
 export function Control(){
 
@@ -30,7 +30,10 @@ export function Control(){
 
   return (
     <div>
+      <span>Recent first</span>
+      <SortCheckbox/>
       <Input
+        type={'text'}
         value={value}
         autoFocus={true}
         onChange={handleChange}
@@ -38,5 +41,20 @@ export function Control(){
       />
       {typing && <Button />}
     </div>
+  )
+}
+
+function SortCheckbox(){
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    const toggled = e.target.checked;
+    dispatch(sortTasksRecentFirst(toggled));
+  }
+
+  return(
+    <Input
+      type={'checkbox'}
+      onChange={handleChange}
+    />
   )
 }
