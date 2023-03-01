@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Input } from "../Input/Input";
 import { Button } from "../Button/Button";
-import { addTodo, sortTasksRecentFirst } from '../../store';
+import { addTodo } from '../../store';
 
-export function Control(){
+export function Control({toggleSort}){
 
   const [value, setValue] = useState('');
   const [typing, setTyping] = useState(false);
@@ -31,7 +31,7 @@ export function Control(){
   return (
     <div>
       <span>Recent first</span>
-      <SortCheckbox/>
+      <SortCheckbox toggleSort={toggleSort}/>
       <Input
         type={'text'}
         value={value}
@@ -44,11 +44,10 @@ export function Control(){
   )
 }
 
-function SortCheckbox(){
-  const dispatch = useDispatch();
+function SortCheckbox({toggleSort}){
   const handleChange = (e) => {
     const toggled = e.target.checked;
-    dispatch(sortTasksRecentFirst(toggled));
+    toggleSort(toggled);
   }
 
   return(
