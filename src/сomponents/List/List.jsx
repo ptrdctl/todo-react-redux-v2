@@ -1,25 +1,49 @@
-import { useSelector } from "react-redux";
-import { getTasks, getRecentTasks } from "../../store";
+import {useDispatch, useSelector} from "react-redux";
+import { getTasks, getRecentTasks, completeTodo } from "../../store";
 
-export function List({sort}){
+export function List({sort, filter}){
 
+  const dispatch = useDispatch();
   const tasks = useSelector(getTasks);
   const recentTasks = useSelector(getRecentTasks);
-  let preparedRenederingList = tasks;
-  if(sort) preparedRenederingList = recentTasks
+  const tasksList = (sort) ? recentTasks : tasks;
+  const filteredTasksList = (filter === 'showActive') ? (tasksList.filter(task => !task.completed)) :
+    ((filter === 'showCompleted') ? (tasksList.filter(task => task.completed)) : tasksList);
+
+  const handleCompleteTask = (e) => {
+    const id = e.target.id;
+    console.log(id);
+    const completed = e.target.checked;
+    dispatch(completeTodo(id, completed))
+  }
 
   return(
       <div>
       {
-        preparedRenederingList.map(task => {
+        filteredTasksList.map(task => {
           return(
             <div key={task.id}>
               <span>{task.date.toLocaleString()}</span>
               <span>{task.text}</span>
-              <input type="checkbox"/>
+              <Checkbox
+                id={task.id}
+                onChange={handleCompleteTask}
+                checked={task.completed}
+              />
             </div>
           )
         })}
       </div>
+  )
+}
+
+const Checkbox = ({id, onChange, checked}) => {
+  return(
+    <input
+      type="checkbox"
+      id={id}
+      onChange={onChange}
+      checked={checked}
+    />
   )
 }

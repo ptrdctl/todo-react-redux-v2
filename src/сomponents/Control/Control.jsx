@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+
 import { Input } from "../Input/Input";
 import { Button } from "../Button/Button";
+import { Radio } from "../Radio/Radio";
+
 import { addTodo } from '../../store';
 
-export function Control({toggleSort}){
+export function Control({toggleSort, chooseFilter}){
 
   const [value, setValue] = useState('');
   const [typing, setTyping] = useState(false);
@@ -30,6 +33,7 @@ export function Control({toggleSort}){
 
   return (
     <div>
+      <Radio chooseFilter={chooseFilter}/>
       <span>Recent first</span>
       <SortCheckbox toggleSort={toggleSort}/>
       <Input
