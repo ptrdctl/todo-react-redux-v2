@@ -12,7 +12,6 @@ export function List({sort, filter}){
 
   const handleCompleteTask = (e) => {
     const id = e.target.id;
-    console.log(id);
     const completed = e.target.checked;
     dispatch(completeTodo(id, completed))
   }

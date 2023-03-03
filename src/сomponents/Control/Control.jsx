@@ -14,8 +14,8 @@ export function Control({toggleSort, chooseFilter}){
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
-    const trimmedValue = value.trim()
-    if (e.code === 'Enter' && trimmedValue) {
+    const trimmedValue = value.trim();
+    if (e.code === 'Enter' || e.type === 'pointerdown' && trimmedValue) {
       dispatch(addTodo(trimmedValue));
       setValue('');
     }
@@ -43,7 +43,13 @@ export function Control({toggleSort, chooseFilter}){
         onChange={handleChange}
         onKeyDown={handleSubmit}
       />
-      {typing && <Button />}
+      {typing &&
+        <Button
+          onPointerDown={handleSubmit}
+        >
+          +
+        </Button>
+      }
     </div>
   )
 }

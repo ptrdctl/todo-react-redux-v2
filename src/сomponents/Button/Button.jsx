@@ -1,5 +1,9 @@
-export function Button(){
+export function Button({onPointerDown, children}){
   return(
-    <button>+</button>
+    <button
+      onPointerDown={onPointerDown}
+    >
+      {children}
+    </button>
   )
 }
