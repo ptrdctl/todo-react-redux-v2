@@ -16,6 +16,7 @@ function App() {
       <Control
         toggleSort={toggleSort}
         chooseFilter={chooseFilter}
+        filter={filter}
       />
 
       <List

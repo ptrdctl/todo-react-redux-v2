@@ -7,7 +7,7 @@ import { Radio } from "../Radio/Radio";
 
 import { addTodo } from '../../store';
 
-export function Control({toggleSort, chooseFilter}){
+export function Control({toggleSort, chooseFilter, filter}){
 
   const [value, setValue] = useState('');
   const [typing, setTyping] = useState(false);
@@ -33,7 +33,7 @@ export function Control({toggleSort, chooseFilter}){
 
   return (
     <div>
-      <Radio chooseFilter={chooseFilter}/>
+      <Radio chooseFilter={chooseFilter} filter={filter}/>
       <span>Recent first</span>
       <SortCheckbox toggleSort={toggleSort}/>
       <Input

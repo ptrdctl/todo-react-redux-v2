@@ -1,19 +1,25 @@
-export function Radio({chooseFilter}) {
+export function Radio({chooseFilter, filter}) {
 
   const allHandler = (e) => {e.target.checked && chooseFilter('showAll')};
   const activeHandler = (e) => {e.target.checked && chooseFilter('showActive')};
   const completedHandler = (e) => {e.target.checked && chooseFilter('showCompleted')};
 
+  const radios = [
+    {id: 'showAll', handler: allHandler, text: 'Show all'},
+    {id: 'showActive', handler: activeHandler, text: 'Active'},
+    {id: 'showCompleted', handler: completedHandler, text: 'Completed'}
+  ]
+
   return(
     <div>
-      <input type="radio" name='filter' id='showall' onChange={allHandler}/>
-      <label htmlFor="showall">Show all</label>
-
-      <input type="radio" name='filter' id='active' onChange={activeHandler}/>
-      <label htmlFor="active">Active</label>
-
-      <input type="radio" name='filter' id='completed' onChange={completedHandler}/>
-      <label htmlFor="completed">Completed</label>
+      {radios.map((radio) => {
+        return(
+          <span key={radio.id}>
+            <input key={radio.id} type="radio" name='filter' id={radio.id} onChange={radio.handler} checked={radio.id === filter}/>
+            <label key={radio.id} htmlFor={radio.id}>{radio.text}</label>
+          </span>
+        )
+      })}
     </div>
   )
 }
