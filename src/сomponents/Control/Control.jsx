@@ -15,7 +15,7 @@ export function Control({toggleSort, chooseFilter, filter}){
 
   const handleSubmit = (e) => {
     const trimmedValue = value.trim();
-    if (e.code === 'Enter' || e.type === 'pointerdown' && trimmedValue) {
+    if ((e.code === 'Enter' || e.type === 'pointerdown') && trimmedValue) {
       dispatch(addTodo(trimmedValue));
       setValue('');
     }

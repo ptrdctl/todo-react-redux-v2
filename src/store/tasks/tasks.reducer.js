@@ -16,14 +16,7 @@ export function tasksReducer(state = initialState, action){
         }
       ]
     case COMPLETE_TODO:
-      return [
-        ...state.map(task => {
-          if(task.id !== action.id) {
-            return task
-          }
-          return {...task, completed: action.completed}
-        })
-      ]
+      return state.map(task => task.id === action.id ? {...task, completed: action.completed} : task)
     default:
       return state;
   }
