@@ -1,5 +1,7 @@
-import {useDispatch, useSelector} from "react-redux";
-import { getTasks, getRecentTasks, completeTodo } from "../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { getTasks, getRecentTasks, completeTodo } from "../../../../store";
+
+import { Checkbox } from "../../../../uiElems";
 
 export function List({sort, filter}){
 
@@ -33,16 +35,5 @@ export function List({sort, filter}){
           )
         })}
       </div>
-  )
-}
-
-const Checkbox = ({id, onChange, checked}) => {
-  return(
-    <input
-      type="checkbox"
-      id={id}
-      onChange={onChange}
-      checked={checked}
-    />
   )
 }

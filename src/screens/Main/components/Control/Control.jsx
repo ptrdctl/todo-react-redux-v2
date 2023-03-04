@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { Input } from "../Input/Input";
-import { Button } from "../Button/Button";
-import { Radio } from "../Radio/Radio";
+import { addTodo } from "../../../../store";
 
-import { addTodo } from '../../store';
+import { Input, Button } from "../../../../uiElems";
+import { Filter } from "../Filter/Filter";
+import { SortCheckbox } from "../SortCheckbox/SortCheckbox";
 
-export function Control({toggleSort, chooseFilter, filter}){
+export function Control({toggleSort, sort, chooseFilter, filter}){
+
+  const dispatch = useDispatch();
 
   const [value, setValue] = useState('');
   const [typing, setTyping] = useState(false);
-  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     const trimmedValue = value.trim();
@@ -33,11 +34,13 @@ export function Control({toggleSort, chooseFilter, filter}){
 
   return (
     <div>
-      <Radio chooseFilter={chooseFilter} filter={filter}/>
+      <Filter chooseFilter={chooseFilter} filter={filter}/>
       <span>Recent first</span>
-      <SortCheckbox toggleSort={toggleSort}/>
+      <SortCheckbox
+        toggleSort={toggleSort}
+        checked={sort}
+      />
       <Input
-        type={'text'}
         value={value}
         autoFocus={true}
         onChange={handleChange}
@@ -54,16 +57,3 @@ export function Control({toggleSort, chooseFilter, filter}){
   )
 }
 
-function SortCheckbox({toggleSort}){
-  const handleChange = (e) => {
-    const toggled = e.target.checked;
-    toggleSort(toggled);
-  }
-
-  return(
-    <Input
-      type={'checkbox'}
-      onChange={handleChange}
-    />
-  )
-}
