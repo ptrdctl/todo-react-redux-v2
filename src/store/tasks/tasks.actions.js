@@ -1,5 +1,6 @@
 export const ADD_TODO = 'ADD_TODO'
 export const COMPLETE_TODO = 'COMPLETE_TODO';
+export const CLEAR_ALL = 'CLEAR_ALL'
 
 export function addTodo(text) {
   return {
@@ -13,5 +14,11 @@ export function completeTodo(id, completed) {
     type: COMPLETE_TODO,
     id,
     completed
+  }
+}
+
+export function clearAll() {
+  return {
+    type: CLEAR_ALL
   }
 }

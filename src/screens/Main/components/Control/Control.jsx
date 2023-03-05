@@ -6,6 +6,7 @@ import { addTodo } from "../../../../store";
 import { Input, Button } from "../../../../uiElems";
 import { Filter } from "../Filter/Filter";
 import { SortCheckbox } from "../SortCheckbox/SortCheckbox";
+import { ClearButton } from "../ClearButton/ClearButton";
 
 export function Control({toggleSort, sort, chooseFilter, filter}){
 
@@ -19,6 +20,7 @@ export function Control({toggleSort, sort, chooseFilter, filter}){
     if ((e.code === 'Enter' || e.type === 'pointerdown') && trimmedValue) {
       dispatch(addTodo(trimmedValue));
       setValue('');
+      setTyping(false);
     }
   }
 
@@ -35,6 +37,9 @@ export function Control({toggleSort, sort, chooseFilter, filter}){
   return (
     <div>
       <Filter chooseFilter={chooseFilter} filter={filter}/>
+      <ClearButton>
+        Clear all
+      </ClearButton>
       <span>Recent first</span>
       <SortCheckbox
         toggleSort={toggleSort}

@@ -24,7 +24,7 @@ export function List({sort, filter}){
         filteredTasksList.map(task => {
           return(
             <div key={task.id}>
-              <span>{task.date.toLocaleString()}</span>
+              <span>{new Date(task.date).toLocaleString()}</span>
               <span>{task.text}</span>
               <Checkbox
                 id={task.id}
