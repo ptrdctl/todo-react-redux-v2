@@ -1,13 +1,12 @@
-import {useState} from "react";
+import { useState } from 'react';
 
-import { Control, List } from "./components";
+import { Control, List } from './components';
 
-export function Main(){
-
+export function Main() {
   const [sort, setSort] = useState(false);
-  const toggleSort = (toggled) => { setSort(toggled) };
+  const toggleSort = (toggled) => { setSort(toggled); };
   const [filter, setFilter] = useState('showAll');
-  const chooseFilter = (filterValue) => { setFilter(filterValue)};
+  const chooseFilter = (filterValue) => { setFilter(filterValue); };
 
   return (
     <>
@@ -22,5 +21,5 @@ export function Main(){
         filter={filter}
       />
     </>
-  )
+  );
 }
