@@ -19,12 +19,14 @@ export function tasksReducer(state = initialState, action) {
       return addTodoNewState;
 
     case COMPLETE_TODO:
-      const completeTodoNewState = state.map((task) => (task.id === action.id
-        ? {
-          ...task,
-          completed: action.completed,
-        }
-        : task));
+      const completeTodoNewState = state.map((task) =>
+        task.id === action.id
+          ? {
+              ...task,
+              completed: action.completed,
+            }
+          : task
+      );
       localStorage.tasks = JSON.stringify(completeTodoNewState);
       return completeTodoNewState;
 

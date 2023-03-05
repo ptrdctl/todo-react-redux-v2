@@ -1,8 +1,3 @@
-export function Input({...props}){
-  return (
-    <input
-      type='text'
-      {...props}
-    />
-  )
+export function Input({ ...props }) {
+  return <input type='text' {...props} />;
 }
