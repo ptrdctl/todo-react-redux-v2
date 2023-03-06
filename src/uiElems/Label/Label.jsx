@@ -1,3 +1,10 @@
-export function Label({ children, ...props }) {
-  return <label {...props}>{children}</label>;
+export function Label({ children, htmlFor, ...props }) {
+  return (
+    <label
+      htmlFor={htmlFor}
+      {...props}
+    >
+      {children}
+    </label>
+  );
 }

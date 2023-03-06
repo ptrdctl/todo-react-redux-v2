@@ -8,25 +8,27 @@ import { Filter } from '../Filter/Filter';
 import { SortCheckbox } from '../SortCheckbox/SortCheckbox';
 import { ClearButton } from '../ClearButton/ClearButton';
 
-export function Control({ toggleSort, sort, chooseFilter, filter }) {
+export function Control({
+  toggleSort, sort, chooseFilter, filter,
+}) {
   const dispatch = useDispatch();
-
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   const [typing, setTyping] = useState(false);
 
   const handleSubmit = (e) => {
     const trimmedValue = value.trim();
     if ((e.code === 'Enter' || e.type === 'pointerdown') && trimmedValue) {
       dispatch(addTodo(trimmedValue));
-      setValue("");
+
+      setValue('');
       setTyping(false);
     }
   };
 
   const handleChange = (e) => {
-    const value = e.target.value;
-    setValue(value);
-    if (value.trim()) {
+    const inputed = e.target.value;
+    setValue(inputed);
+    if (inputed.trim()) {
       setTyping(true);
     } else {
       setTyping(false);
@@ -41,7 +43,7 @@ export function Control({ toggleSort, sort, chooseFilter, filter }) {
       <SortCheckbox toggleSort={toggleSort} checked={sort} />
       <Input
         value={value}
-        autoFocus={true}
+        autoFocus
         onChange={handleChange}
         onKeyDown={handleSubmit}
       />

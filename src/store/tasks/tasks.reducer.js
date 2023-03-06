@@ -1,12 +1,12 @@
 import { nanoid } from 'nanoid';
 import { ADD_TODO, COMPLETE_TODO, CLEAR_ALL } from './tasks.actions';
 
-const initialState = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
+const initialState = JSON.parse(localStorage.getItem('tasks')) ?? [];
 
 export function tasksReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_TODO:
-      const addTodoNewState = [
+      return [
         ...state,
         {
           id: nanoid(),
@@ -15,23 +15,16 @@ export function tasksReducer(state = initialState, action) {
           date: Date.now(),
         },
       ];
-      localStorage.tasks = JSON.stringify(addTodoNewState);
-      return addTodoNewState;
 
     case COMPLETE_TODO:
-      const completeTodoNewState = state.map((task) =>
-        task.id === action.id
-          ? {
-              ...task,
-              completed: action.completed,
-            }
-          : task
-      );
-      localStorage.tasks = JSON.stringify(completeTodoNewState);
-      return completeTodoNewState;
+      return state.map((task) => (task.id === action.id
+        ? {
+          ...task,
+          completed: action.completed,
+        }
+        : task));
 
     case CLEAR_ALL:
-      localStorage.tasks = JSON.stringify([]);
       return [];
 
     default:
