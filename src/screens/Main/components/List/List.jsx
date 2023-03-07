@@ -1,27 +1,31 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { getTasks, getRecentTasks, completeTodo } from '../../../../store';
 import { Checkbox } from '../../../../uiElems';
 
+function setToLocalStorage(key, payload) {
+  const value = JSON.stringify(payload);
+  localStorage.setItem(key, value);
+}
+
 export function List({ sort, filter }) {
+  const dispatch = useDispatch();
   const tasks = useSelector(getTasks);
+  const recentTasks = useSelector(getRecentTasks);
+  const sortedTasksList = sort ? recentTasks : tasks;
 
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    setToLocalStorage('tasks', tasks);
   }, [tasks]);
 
-  const dispatch = useDispatch();
-  const recentTasks = useSelector(getRecentTasks);
-
-  const sortedTasksList = sort ? recentTasks : tasks;
-  const filteredTasksList = (() => {
+  const taskListForRendering = useMemo(() => {
     switch (filter) {
       case 'showActive': return sortedTasksList.filter((task) => !task.completed);
       case 'showCompleted': return sortedTasksList.filter((task) => task.completed);
       default: return sortedTasksList;
     }
-  })();
+  }, [filter, sortedTasksList]);
 
   const handleCompleteTask = (e) => {
     dispatch(completeTodo(e.target.id, e.target.checked));
@@ -29,7 +33,7 @@ export function List({ sort, filter }) {
 
   return (
     <div>
-      {filteredTasksList.map((task) => (
+      {taskListForRendering.map((task) => (
         <div key={task.id}>
           <span>{new Date(task.date).toLocaleString()}</span>
           <span>{task.text}</span>
