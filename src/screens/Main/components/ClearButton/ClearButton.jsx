@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { Button } from '../../../../uiElems';
+import { Button } from '../../../../shared';
 import { clearAll } from '../../../../store';
 
 export function ClearButton({ children }) {

@@ -1,8 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
+import Container from 'react-bootstrap/Container';
+
+import { useSelector } from 'react-redux';
 import { useEffect, useMemo } from 'react';
 
-import { getTasks, getRecentTasks, completeTodo } from '../../../../store';
-import { Checkbox } from '../../../../uiElems';
+import { getTasks, getRecentTasks } from '../../../../store';
+import { Task } from '../Task/Task';
+import { StyledList } from './List.styles';
 
 function setToLocalStorage(key, payload) {
   const value = JSON.stringify(payload);
@@ -10,7 +13,6 @@ function setToLocalStorage(key, payload) {
 }
 
 export function List({ sort, filter }) {
-  const dispatch = useDispatch();
   const tasks = useSelector(getTasks);
   const recentTasks = useSelector(getRecentTasks);
   const sortedTasksList = sort ? recentTasks : tasks;
@@ -27,23 +29,17 @@ export function List({ sort, filter }) {
     }
   }, [filter, sortedTasksList]);
 
-  const handleCompleteTask = (e) => {
-    dispatch(completeTodo(e.target.id, e.target.checked));
-  };
-
   return (
-    <div>
-      {taskListForRendering.map((task) => (
-        <div key={task.id}>
-          <span>{new Date(task.date).toLocaleString()}</span>
-          <span>{task.text}</span>
-          <Checkbox
-            id={task.id}
-            onChange={handleCompleteTask}
-            checked={task.completed}
+    <Container fluid>
+      <StyledList variant="flush">
+        {taskListForRendering.map((task) => (
+          <Task
+            key={task.id}
+            task={task}
+            filter={filter}
           />
-        </div>
-      ))}
-    </div>
+        ))}
+      </StyledList>
+    </Container>
   );
 }

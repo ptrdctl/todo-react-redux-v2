@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import Container from 'react-bootstrap/Container';
 import { Control, List } from './components';
 
 export function Main() {
@@ -13,7 +13,7 @@ export function Main() {
   };
 
   return (
-    <>
+    <Container fluid>
       <Control
         toggleSort={toggleSort}
         sort={sort}
@@ -21,6 +21,6 @@ export function Main() {
         filter={filter}
       />
       <List sort={sort} filter={filter} />
-    </>
+    </Container>
   );
 }

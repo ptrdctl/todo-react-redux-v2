@@ -1,4 +1,4 @@
-import { Radio, Label } from '../../../../uiElems';
+import { Radio, Label } from '../../../../shared';
 
 export function Filter({ chooseFilter, filter }) {
   const allHandler = (e) => {

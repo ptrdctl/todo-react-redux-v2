@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { addTodo } from '../../../../store';
 
-import { Input, Button } from '../../../../uiElems';
+import { Input, Button } from '../../../../shared';
 import { Filter } from '../Filter/Filter';
 import { SortCheckbox } from '../SortCheckbox/SortCheckbox';
 import { ClearButton } from '../ClearButton/ClearButton';

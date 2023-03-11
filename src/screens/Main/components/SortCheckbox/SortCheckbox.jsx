@@ -1,4 +1,4 @@
-import { Checkbox } from '../../../../uiElems';
+import { Checkbox } from '../../../../shared';
 
 export function SortCheckbox({ toggleSort }) {
   const handleChange = (e) => {
