@@ -3,9 +3,10 @@ import Container from 'react-bootstrap/Container';
 import { useSelector } from 'react-redux';
 import { useEffect, useMemo } from 'react';
 
+import ListGroup from 'react-bootstrap/ListGroup';
+
 import { getTasks, getRecentTasks } from '../../../../store';
 import { Task } from '../Task/Task';
-import { StyledList } from './List.styles';
 
 function setToLocalStorage(key, payload) {
   const value = JSON.stringify(payload);
@@ -31,7 +32,7 @@ export function List({ sort, filter }) {
 
   return (
     <Container fluid>
-      <StyledList variant="flush">
+      <ListGroup variant="flush">
         {taskListForRendering.map((task) => (
           <Task
             key={task.id}
@@ -39,7 +40,7 @@ export function List({ sort, filter }) {
             filter={filter}
           />
         ))}
-      </StyledList>
+      </ListGroup>
     </Container>
   );
 }

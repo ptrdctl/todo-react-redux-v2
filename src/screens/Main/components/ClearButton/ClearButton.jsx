@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { Button } from '../../../../shared';
+import Button from 'react-bootstrap/Button';
 import { clearAll } from '../../../../store';
 
 export function ClearButton({ children }) {
@@ -8,5 +8,12 @@ export function ClearButton({ children }) {
     dispatch(clearAll());
   };
 
-  return <Button onPointerDown={handler}>{children}</Button>;
+  return (
+    <Button
+      variant="outline-danger"
+      onPointerDown={handler}
+    >
+      {children}
+    </Button>
+  );
 }

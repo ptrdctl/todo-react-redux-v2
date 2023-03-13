@@ -1,5 +1,7 @@
 import { nanoid } from 'nanoid';
-import { ADD_TODO, COMPLETE_TODO, CLEAR_ALL } from './tasks.actions';
+import {
+  ADD_TODO, COMPLETE_TODO, CLEAR_ALL, DELETE_TODO,
+} from './tasks.actions';
 
 const initialState = JSON.parse(localStorage.getItem('tasks')) ?? [];
 
@@ -26,6 +28,9 @@ export function tasksReducer(state = initialState, action) {
 
     case CLEAR_ALL:
       return [];
+
+    case DELETE_TODO:
+      return state.filter((task) => (task.id !== action.id));
 
     default:
       return state;

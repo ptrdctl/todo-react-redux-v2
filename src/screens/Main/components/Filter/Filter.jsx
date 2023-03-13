@@ -1,4 +1,6 @@
-import { Radio, Label } from '../../../../shared';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import { useMemo } from 'react';
 
 export function Filter({ chooseFilter, filter }) {
   const allHandler = (e) => {
@@ -11,6 +13,14 @@ export function Filter({ chooseFilter, filter }) {
     if (e.target.checked) chooseFilter('showCompleted');
   };
 
+  const buttonVariant = useMemo(() => {
+    switch (filter) {
+      case 'showActive': return 'outline-success';
+      case 'showCompleted': return 'outline-secondary';
+      default: return 'outline-primary';
+    }
+  }, [filter]);
+
   const radios = [
     { id: 'showAll', handler: allHandler, text: 'Show all' },
     { id: 'showActive', handler: activeHandler, text: 'Active' },
@@ -18,21 +28,21 @@ export function Filter({ chooseFilter, filter }) {
   ];
 
   return (
-    <div>
+    <ButtonGroup>
       {radios.map((radio) => (
-        <span key={radio.id}>
-          <Radio
-            key={radio.id}
-            name="filter"
-            id={radio.id}
-            onChange={radio.handler}
-            checked={radio.id === filter}
-          />
-          <Label htmlFor={radio.id}>
-            {radio.text}
-          </Label>
-        </span>
+        <ToggleButton
+          type="radio"
+          variant={buttonVariant}
+          key={radio.id}
+          name="filter"
+          id={radio.id}
+          onChange={radio.handler}
+          checked={radio.id === filter}
+          value={radio.id}
+        >
+          {radio.text}
+        </ToggleButton>
       ))}
-    </div>
+    </ButtonGroup>
   );
 }

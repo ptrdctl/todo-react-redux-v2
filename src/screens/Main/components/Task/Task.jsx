@@ -1,10 +1,13 @@
 import { useDispatch } from 'react-redux';
 
-import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
 
 import { completeTodo } from '../../../../store';
-import { Checkbox } from '../../../../shared';
-import { StyledRow, StyledTask, StyledText } from './Task.styles';
+
+import {
+  StyledCol, StyledRow, StyledTask, StyledText,
+} from './Task.styles';
+import { DeleteButton } from '../DeleteButton/DeleteButton';
 
 export function Task({ task, filter }) {
   const dispatch = useDispatch();
@@ -18,15 +21,19 @@ export function Task({ task, filter }) {
       filter={filter}
     >
       <StyledRow>
-        <Col xs="auto"><span>{new Date(task.date).toLocaleString()}</span></Col>
-        <Col><StyledText>{task.text}</StyledText></Col>
-        <Col xs="auto">
-          <Checkbox
+        <StyledCol xs="auto"><DeleteButton id={task.id} /></StyledCol>
+        <StyledCol xs="auto">
+          <span>{new Date(task.date).toLocaleString()}</span>
+        </StyledCol>
+        <StyledCol><StyledText>{task.text}</StyledText></StyledCol>
+        <StyledCol xs="auto">
+          <Form.Check
+            type="checkbox"
             id={task.id}
             onChange={handleCompleteTask}
             checked={task.completed}
           />
-        </Col>
+        </StyledCol>
       </StyledRow>
     </StyledTask>
   );

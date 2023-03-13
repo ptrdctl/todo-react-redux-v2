@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Button from 'react-bootstrap/Button';
+
 import { addTodo } from '../../../../store';
 
-import { Input, Button } from '../../../../shared';
 import { Filter } from '../Filter/Filter';
-import { SortCheckbox } from '../SortCheckbox/SortCheckbox';
 import { ClearButton } from '../ClearButton/ClearButton';
+import { SortToggle } from '../SortToggle/SortToggle';
+import { StyledControl, StyledControlElems } from './Control.styles';
 
 export function Control({
   toggleSort, sort, chooseFilter, filter,
@@ -36,18 +40,24 @@ export function Control({
   };
 
   return (
-    <div>
-      <Filter chooseFilter={chooseFilter} filter={filter} />
-      <ClearButton>Clear all</ClearButton>
-      <span>Recent first</span>
-      <SortCheckbox toggleSort={toggleSort} checked={sort} />
-      <Input
-        value={value}
-        autoFocus
-        onChange={handleChange}
-        onKeyDown={handleSubmit}
-      />
-      {typing && <Button onPointerDown={handleSubmit}>+</Button>}
-    </div>
+    <StyledControl>
+      <StyledControlElems xs="auto"><Filter chooseFilter={chooseFilter} filter={filter} /></StyledControlElems>
+      <StyledControlElems xs="auto">
+        <SortToggle
+          toggleSort={toggleSort}
+          checked={sort}
+        />
+      </StyledControlElems>
+      <StyledControlElems xs="auto"><ClearButton>Clear all</ClearButton></StyledControlElems>
+      <InputGroup as={StyledControlElems}>
+        <Form.Control
+          type="text"
+          value={value}
+          onChange={handleChange}
+          onKeyDown={handleSubmit}
+        />
+        {typing ? <Button variant="outline-primary" onPointerDown={handleSubmit}>+</Button> : null}
+      </InputGroup>
+    </StyledControl>
   );
 }
