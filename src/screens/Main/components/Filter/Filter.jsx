@@ -1,6 +1,6 @@
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import { useMemo } from 'react';
+import { StyledFilter } from './Filter.styles';
 
 export function Filter({ chooseFilter, filter }) {
   const allHandler = (e) => {
@@ -28,7 +28,7 @@ export function Filter({ chooseFilter, filter }) {
   ];
 
   return (
-    <ButtonGroup>
+    <StyledFilter>
       {radios.map((radio) => (
         <ToggleButton
           type="radio"
@@ -43,6 +43,6 @@ export function Filter({ chooseFilter, filter }) {
           {radio.text}
         </ToggleButton>
       ))}
-    </ButtonGroup>
+    </StyledFilter>
   );
 }

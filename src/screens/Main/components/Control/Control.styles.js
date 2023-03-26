@@ -1,13 +1,16 @@
 import styled from 'styled-components';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import InputGroup from 'react-bootstrap/InputGroup';
 
-export const StyledControl = styled(Row)`
-  margin-right: 15px;
-  margin-left: 18px;
+export const StyledControl = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 10px 0 10px;
+  gap: 8px;
 `;
 
-export const StyledControlElems = styled(Col)`
-  margin-top: 15px;
-  margin-bottom: 15px;
+export const StyledInput = styled(InputGroup)`
+  min-width: 300px;
+  flex: 1;
 `;

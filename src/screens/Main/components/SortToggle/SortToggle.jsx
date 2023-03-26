@@ -1,4 +1,4 @@
-import ToggleButton from 'react-bootstrap/ToggleButton';
+import { StyledToggleButton } from './SortToggle.styles';
 
 export function SortToggle({ toggleSort, checked }) {
   const handleChange = (e) => {
@@ -7,7 +7,7 @@ export function SortToggle({ toggleSort, checked }) {
   };
 
   return (
-    <ToggleButton
+    <StyledToggleButton
       id="sort-toggle"
       value="1"
       type="checkbox"
@@ -16,6 +16,6 @@ export function SortToggle({ toggleSort, checked }) {
       checked={checked}
     >
       Recent first
-    </ToggleButton>
+    </StyledToggleButton>
   );
 }

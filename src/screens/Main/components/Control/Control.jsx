@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 
 import { addTodo } from '../../../../store';
@@ -10,7 +9,7 @@ import { addTodo } from '../../../../store';
 import { Filter } from '../Filter/Filter';
 import { ClearButton } from '../ClearButton/ClearButton';
 import { SortToggle } from '../SortToggle/SortToggle';
-import { StyledControl, StyledControlElems } from './Control.styles';
+import { StyledControl, StyledInput } from './Control.styles';
 
 export function Control({
   toggleSort, sort, chooseFilter, filter,
@@ -41,23 +40,25 @@ export function Control({
 
   return (
     <StyledControl>
-      <StyledControlElems xs="auto"><Filter chooseFilter={chooseFilter} filter={filter} /></StyledControlElems>
-      <StyledControlElems xs="auto">
-        <SortToggle
-          toggleSort={toggleSort}
-          checked={sort}
-        />
-      </StyledControlElems>
-      <StyledControlElems xs="auto"><ClearButton>Clear all</ClearButton></StyledControlElems>
-      <InputGroup as={StyledControlElems}>
+      <Filter
+        chooseFilter={chooseFilter}
+        filter={filter}
+      />
+      <SortToggle
+        toggleSort={toggleSort}
+        checked={sort}
+      />
+      <ClearButton>Clear all</ClearButton>
+      <StyledInput>
         <Form.Control
           type="text"
+          placeholder="Type а task"
           value={value}
           onChange={handleChange}
           onKeyDown={handleSubmit}
         />
         {typing ? <Button variant="outline-primary" onPointerDown={handleSubmit}>+</Button> : null}
-      </InputGroup>
+      </StyledInput>
     </StyledControl>
   );
 }

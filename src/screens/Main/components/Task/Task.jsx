@@ -1,15 +1,18 @@
 import { useDispatch } from 'react-redux';
 
-import Form from 'react-bootstrap/Form';
-
 import { completeTodo } from '../../../../store';
 
 import {
-  StyledCol, StyledRow, StyledTask, StyledText,
+  StyledCheckbox,
+  StyledTask,
+  StyledDate,
+  StyledText,
 } from './Task.styles';
 import { DeleteButton } from '../DeleteButton/DeleteButton';
 
-export function Task({ task, filter }) {
+export function Task({
+  task, filter, handleDateClick, isShortViewDate,
+}) {
   const dispatch = useDispatch();
   const handleCompleteTask = (e) => {
     dispatch(completeTodo(e.target.id, e.target.checked));
@@ -17,24 +20,24 @@ export function Task({ task, filter }) {
 
   return (
     <StyledTask
-      completed={task.completed}
+      completed={task.completed ? 1 : 0}
       filter={filter}
     >
-      <StyledRow>
-        <StyledCol xs="auto"><DeleteButton id={task.id} /></StyledCol>
-        <StyledCol xs="auto">
-          <span>{new Date(task.date).toLocaleString()}</span>
-        </StyledCol>
-        <StyledCol><StyledText>{task.text}</StyledText></StyledCol>
-        <StyledCol xs="auto">
-          <Form.Check
-            type="checkbox"
-            id={task.id}
-            onChange={handleCompleteTask}
-            checked={task.completed}
-          />
-        </StyledCol>
-      </StyledRow>
+      <DeleteButton id={task.id} />
+      <StyledDate
+        onPointerDown={handleDateClick}
+        isShortViewDate={isShortViewDate}
+      >
+        {isShortViewDate ? new Date(task.date).toLocaleString()
+          : new Date(task.date).toLocaleTimeString('eu-EU', { timeStyle: 'short' })}
+      </StyledDate>
+      <StyledText>{task.text}</StyledText>
+      <StyledCheckbox
+        type="checkbox"
+        id={task.id}
+        onChange={handleCompleteTask}
+        checked={task.completed}
+      />
     </StyledTask>
   );
 }

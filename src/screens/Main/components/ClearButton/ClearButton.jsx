@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
-import Button from 'react-bootstrap/Button';
 import { clearAll } from '../../../../store';
+import { StyledClearButton } from './ClearButton.styles';
 
 export function ClearButton({ children }) {
   const dispatch = useDispatch();
@@ -9,11 +9,11 @@ export function ClearButton({ children }) {
   };
 
   return (
-    <Button
+    <StyledClearButton
       variant="outline-danger"
       onPointerDown={handler}
     >
       {children}
-    </Button>
+    </StyledClearButton>
   );
 }
